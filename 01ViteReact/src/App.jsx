@@ -1,8 +1,8 @@
-
+import Vik from './vik.jsx'
 function App() {
 
   return (
-   <h1>Jai Hind Dosto, Main Vikash:</h1>
+   <Vik />
   )
 }
 
