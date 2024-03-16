@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <h2 className='bg-green-500 text-black p-4 rounded-xl'>Welcome to my Webpage:</h2>
-      <Card name="vikash" />
-      <Card name="Sharma" />
+      <Card name="vikash" btnTxt="Visit me" />
+      <Card name="Sharma"  />
     </>
   )
 }
