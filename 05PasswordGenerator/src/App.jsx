@@ -34,16 +34,18 @@ function App() {
       <div className="main-container">
         <h1>Password Generator</h1>
         <div className="inputs">
-          <input type="text" readOnly placeholder='password' />
+          <input type="text" placeholder='password' />
           <button className='btn'>Copy</button>
         </div>
 
         <div className="lower">
           <div className="first">
-            <input type="range" /> 
+            <input type="range" 
+            onChange={(e) => {setLength(e.target.value)}}
+            /> 
             <label>Length ({length})</label>
           </div>
-          <div className="second">
+          <div className="second"> 
             <input type="checkbox" className='char' /> 
             <label>Numbers</label>
           </div>

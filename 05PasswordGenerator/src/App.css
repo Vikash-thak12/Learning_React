@@ -19,7 +19,7 @@ body{
     border: 1px solid white;
     padding: 20px;
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
@@ -33,9 +33,9 @@ body{
 
 .inputs
 {
-    /* width: 100%; */
     display: flex;
-    /* background-color: red; */
+    background: linear-gradient(45deg, #08001f, #30197d);
+    border-radius: 20px;
     height: 60px;
     margin-top: 10px;
 }
@@ -47,6 +47,7 @@ body{
     padding: 20px;
     outline: none;
     border-radius: 20px;
+    color: white;
 }
 
 input::placeholder
@@ -88,4 +89,9 @@ input::placeholder
 .char 
 {
     transform: scale(2);
+}
+
+.first label
+{
+    padding: 20px;
 }
