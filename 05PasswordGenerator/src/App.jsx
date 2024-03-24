@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [length, setLength] = useState(8);
+  const [length, setLength] = useState(10);
   const [numberallowed, setNumberallowed] = useState(false);
   const [characterallowed, setCharacterallowed] = useState(false);
   const [password, setPassword] = useState("");
@@ -34,23 +34,23 @@ function App() {
       <div className="main-container">
         <h1>Password Generator</h1>
         <div className="inputs">
-          <input type="text" placeholder='password' />
+          <input value={password} type="text" readOnly placeholder='password' />
           <button className='btn'>Copy</button>
         </div>
 
         <div className="lower">
           <div className="first">
-            <input type="range" 
+            <input type="range" min={0} max={50} value={length}
             onChange={(e) => {setLength(e.target.value)}}
             /> 
             <label>Length ({length})</label>
           </div>
           <div className="second"> 
-            <input type="checkbox" className='char' /> 
+            <input type="checkbox" className='char' defaultChecked={numberallowed} onChange={() => {setNumberallowed((prev) => !prev)}} /> 
             <label>Numbers</label>
           </div>
           <div className="third">
-            <input type="checkbox" className='char'/>
+            <input type="checkbox" className='char' defaultChecked={characterallowed} onChange={() => {setCharacterallowed((prev) => !prev)}}/>
             <label>Characters</label>
           </div>
         </div>
