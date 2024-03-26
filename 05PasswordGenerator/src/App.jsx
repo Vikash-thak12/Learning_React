@@ -35,6 +35,8 @@ function App() {
   const passwordRef = useRef(null);
 
   const copytoclipboard = useCallback(() => {
+    passwordRef.current?.select();  // will select all the characters in the input field
+    passwordRef.current?.setSelectionRange(0,69); // will select the range of the password from 0 to 69
     window.navigator.clipboard.writeText(password);
   }, [password])
 
