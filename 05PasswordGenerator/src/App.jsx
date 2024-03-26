@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -8,6 +8,8 @@ function App() {
   const [password, setPassword] = useState("");
 
 
+
+  // usecallback in react js
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -29,6 +31,15 @@ function App() {
     
   }, [length, numberallowed, characterallowed, setPassword]);
 
+  // Useref in react js
+  const passwordRef = useRef(null);
+
+  const copytoclipboard = useCallback(() => {
+    window.navigator.clipboard.writeText(password);
+  }, [password])
+
+
+  // UseEffect in React Js
   useEffect(() => {
     passwordGenerator();
   }, [length, numberallowed, characterallowed, passwordGenerator])
@@ -38,8 +49,8 @@ function App() {
       <div className="main-container">
         <h1>Password Generator</h1>
         <div className="inputs">
-          <input value={password} type="text" readOnly placeholder='password' />
-          <button className='btn'>Copy</button>
+          <input value={password} type="text" readOnly placeholder='password' ref={passwordRef} />
+          <button onClick={copytoclipboard} className='btn'>Copy</button>
         </div>
 
         <div className="lower">
