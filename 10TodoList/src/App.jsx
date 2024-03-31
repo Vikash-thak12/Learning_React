@@ -6,9 +6,19 @@ function App() {
 
   const [todos, setTodos] = useState([])
 
+
+  // for adding the todos in the array
   const  todoadd = (todo) => {
     setTodos( (prev) => [{id: Date.now(), ...todo},...prev])
   }
+
+  const tododelete = (id, todo) => {
+    setTodos((prev) => prev.map( (prevtodo) => (prevtodo.id === id ? todo : prevtodo)))
+  }
+
+  const todoupdate =() => {}
+
+  const togglecomplete = () => {}
 
   return (
     <TodoProvider value={{todos, todoadd, tododelete, todoupdate, togglecomplete}}>
