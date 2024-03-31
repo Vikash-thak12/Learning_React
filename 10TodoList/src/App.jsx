@@ -12,13 +12,21 @@ function App() {
     setTodos( (prev) => [{id: Date.now(), ...todo},...prev])
   }
 
-  const tododelete = (id, todo) => {
+  // for updating the todo in the array
+  const todoupdate = (id, todo) => {
     setTodos((prev) => prev.map( (prevtodo) => (prevtodo.id === id ? todo : prevtodo)))
   }
 
-  const todoupdate =() => {}
+  // for deleting a todo from the array
+  const tododelete =(id) => {
+    setTodos( (prev) => prev.filter( (prevtodo) => (prevtodo.id !== id)))
+  }
 
-  const togglecomplete = () => {}
+
+  // for cheking if the todos are completed or not 
+  const togglecomplete = (id) => {
+    setTodos( (prev) => prev.map( (prevtodo) => prevtodo.id === id ? {...prevtodo, completed: !prevtodo.completed} : prevtodo))
+  }
 
   return (
     <TodoProvider value={{todos, todoadd, tododelete, todoupdate, togglecomplete}}>
