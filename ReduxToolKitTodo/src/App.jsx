@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
 
 function App() {
 
@@ -11,7 +10,6 @@ function App() {
 
   return (
     <>
-    <Navbar count = {count} />
      <h1>This is vikash Thakur</h1>
      <button onClick={counter}>Click here: {count}</button>
     </>
