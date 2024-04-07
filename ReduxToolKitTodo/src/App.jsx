@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import Addtodo from './components/Addtodo'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
      <h1>This is vikash Thakur</h1>
+     <Addtodo />
      <button onClick={counter}>Click here: {count}</button>
     </>
   )
