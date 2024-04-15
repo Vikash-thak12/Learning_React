@@ -34,6 +34,24 @@ export class Service {
             console.log("Create post Error: ", error);
         }
     }
+
+    async updatePost (slug, {title, content, featuredImage, status}) {
+        try {
+            return await this.databases.updateDocument(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                slug,
+                {
+                    title,
+                    content,
+                    featuredImage,
+                    status,
+                }
+            )
+        } catch (error) {
+            console.log("Update Post Error", error);
+        }
+    }
 }
 
 const service = new Service();
