@@ -13,13 +13,13 @@ export class AuthService {
         this.account = new Account(this.client);
     }
 
-    async createAccount({name, email, password}) {
+    async createAccount({ name, email, password }) {
         try {
             const useraccount = await this.account.create(ID.unique(), name, email, password);
-            if(useraccount) {
+            if (useraccount) {
                 //Call another method
-                return this.login({email, password})
-            
+                return this.login({ email, password })
+
             } else {
                 return useraccount;
             }
@@ -30,12 +30,23 @@ export class AuthService {
     }
 
 
-    async login({email, password}) {
+    async login({ email, password }) {
         try {
             return await this.account.createEmailSession(email, password);
-        } catch(error) {
+        } catch (error) {
             // throw error;
             console.log("Error in logging in with Email: ", error);
         }
     }
+
+    async getCurrentUser() {
+        try {
+            return await this.account.get();
+        } catch (error) {   
+            console.log("No active session found.");
+        }
+
+        return null;
+    }
+
 }
