@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, ID, Databases, Storage } from "appwrite";
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
     client = new Client();
@@ -11,31 +11,32 @@ export class Service {
             .setEndpoint(config.appwriteurl)
             .setProject(config.appwriteProjectId)
         this.databases = new Databases(this.client);
-        this.storage  - new Storage(this.client);
+        this.storage - new Storage(this.client);
     }
 
 
-    async createPost ({title, content, featuredImage, status, userId, slug}) {
+    // Serives related to posts
+    async createPost({ title, content, featuredImage, status, userId, slug }) {
         try {
             return await this.databases.createDocument(
 
-                    config.appwriteDatabaseId,
-                    config.appwriteCollectionId,
-                    slug,
-                    {
-                        title, 
-                        content,
-                        featuredImage, 
-                        status,
-                        userId, 
-                    }
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                slug,
+                {
+                    title,
+                    content,
+                    featuredImage,
+                    status,
+                    userId,
+                }
             )
         } catch (error) {
             console.log("Create post Error: ", error);
         }
     }
 
-    async updatePost (slug, {title, content, featuredImage, status}) {
+    async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
@@ -53,7 +54,7 @@ export class Service {
         }
     }
 
-    async deltePost (slug) {
+    async deltePost(slug) {
         try {
             await this.databases.deleteDocument(
                 config.appwriteDatabaseId,
@@ -69,6 +70,72 @@ export class Service {
             return false;
         }
     }
+
+
+    async getPost(slug) {
+        try {
+            await this.databases.getPost(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                slug
+            )
+            return true;
+
+        } catch (error) {
+            console.log("GetPost Error", error);
+            return false;
+        }
+    }
+
+
+    async listPosts(queries = [Query.equal("status", "active")]) {
+        try {
+            await this.databases.listPosts(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                queries
+            )
+        } catch (error) {
+            console.log("List posts error: ", error);
+            return false
+        }
+    }
+
+
+    // File related service
+    async uploadFile(file) {
+        try {
+            return await this.storage.createFile(
+                config.appwriteBucketId,
+                ID.unique(),
+                file
+            )
+        } catch (error) {
+            console.log("Upload File Error:", error)
+            return false
+        }
+    }
+
+    async deleteFile(fileId) {
+        try {
+            await this.storage.deleteFile(
+                config.appwriteBucketId,
+                fileId
+            )
+        } catch (error) {
+            console.log("Delete File Error:", error)
+            return false
+        }
+    }
+
+    getFilePreview(fileId) {
+        return this.storage.getFilePreview(
+            config.appwriteBucketId,
+            fileId
+        )
+    }
+
+
 }
 
 const service = new Service();
