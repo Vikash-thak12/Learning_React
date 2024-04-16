@@ -5,7 +5,7 @@ const initialstate = ({
     userData: null
 })
 
-const authSilce = ( {
+const authSilce = createSlice ( {
     name: "auth",
     initialstate,
     reducers: {
@@ -13,12 +13,12 @@ const authSilce = ( {
             state.status = true;
             state.userData = action.payload.userData;
         }, 
-        logout: (state, action) => {
+        logout: (state) => {
             state.status = false;
             state.userData = null
         }
     }
 })
 
-
+export const {login, logout} = authSilce.actions;
 export default authSilce.reducers;
