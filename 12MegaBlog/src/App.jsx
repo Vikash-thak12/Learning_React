@@ -28,7 +28,7 @@ const App = () => {
       <div className='w-screen block'>
         <Header />
         <main>
-        TODO: {/* <Outlet /> */}
+        TODO:  {/* <Outlet /> */}
         </main>
         <Footer />
       </div>
