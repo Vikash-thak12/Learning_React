@@ -3,6 +3,9 @@ import './App.css'
 import { useDispatch } from 'react-redux';
 import authservice from './appwrite/auth';
 import { login, logout} from './store/authSlice'
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
 
@@ -21,11 +24,15 @@ const App = () => {
     .finally( () => setLoading(false))
   }, [])
   
-  return (
-    <>
-    <h1>Building the Blog app</h1>
-    </>
-  );
+  return !loading ? (
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-600'>
+      <div className='w-full block'>
+        <Header />
+        {/* <Outlet /> */}
+        <Footer />
+      </div>
+    </div>
+  ) : null
 };  
 
 export default App;
