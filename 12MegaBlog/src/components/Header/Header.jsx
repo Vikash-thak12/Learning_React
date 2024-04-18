@@ -14,6 +14,26 @@ const Header = () => {
       slug: '/',
       active: true
     },
+    {
+      name: "Login",
+      slug: '/Login',
+      active: !authStatus,
+    },
+    {
+      name: "Signup",
+      slug: "/Signup",
+      active: !authStatus,
+    },
+    {
+      name: "All Posts",
+      slug: "/All-Posts",
+      active: !authStatus,
+    },
+    {
+      name: "Add Post",
+      slug: "/Add-Post",
+      active: authStatus,
+    }
   ]
   return (
     <div>Header</div>
