@@ -27,7 +27,6 @@ export {
     RTE,
     Signup,
     Login,
-    PostForm,
     AuthLayout,
     Input
 }
