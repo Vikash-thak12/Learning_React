@@ -13,9 +13,9 @@ export class AuthService {
         this.account = new Account(this.client);
     }
 
-    async createAccount({ name, email, password }) {
+    async createAccount({ email, password, name }) {
         try {
-            const useraccount = await this.account.create(ID.unique(), name, email, password);
+            const useraccount = await this.account.create(ID.unique(), email, password, name );
             if (useraccount) {
                 //Call another method
                 return this.login({ email, password })
@@ -24,18 +24,18 @@ export class AuthService {
                 return useraccount;
             }
         } catch (error) {
-            // throw error;
-            console.log("Error in creating the account: ", error);
+            throw error;
+            // console.log("Error in creating the account: ", error);
         }
     }
 
 
     async login({ email, password }) {
         try {
-            return await this.account.createEmailSession(email, password);
+            return await this.client.account.createEmailSession(email, password);
         } catch (error) {
-            // throw error;
-            console.log("Error in logging in with Email: ", error);
+            throw error;
+            // console.log("Error in logging in with Email: ", error);
         }
     }
 
