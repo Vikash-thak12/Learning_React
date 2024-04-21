@@ -1,4 +1,67 @@
-import config from "../config/config";
+// import config from "../config/config";
+// import { Client, Account, ID } from "appwrite";
+
+
+// export class AuthService {
+//     client = new Client();
+//     account;
+
+//     constructor() {
+//         this.client
+//             .setEndpoint(config.appwriteurl)
+//             .setProject(config.appwriteProjectId)
+//         this.account = new Account(this.client);
+//     }
+
+//     async createAccount({email, password, name}) {
+//         try {
+//             const userAccount = await this.account.create(ID.unique(), email, password, name);
+//             if (userAccount) {
+//                 // call another method
+//                 return this.login({email, password});
+//             } else {
+//                return  userAccount;
+//             }
+//         } catch (error) {
+//             throw error;
+//         }
+//     }
+
+
+//     async login({ email, password }) {
+//         try {
+//             return await this.account.createEmailSession(email, password);
+//         } catch (error) {
+//             throw error;
+//         }
+//     }
+
+//     async getCurrentUser() {
+//         try {
+//             return await this.account.get();
+//         } catch (error) {
+//             console.log("No active session found.");
+//         }
+
+//         return null;
+//     }
+
+//     async logout() {
+//         try {
+//             return await this.account.deleteSessions();
+//         } catch (error) {
+//             console.log("Error in logout: ", error);
+//         }
+//     }
+
+// }
+
+
+// const authservice = new AuthService();
+// export default authservice;
+
+
+import config from '../config/config.js';
 import { Client, Account, ID } from "appwrite";
 
 
@@ -9,56 +72,53 @@ export class AuthService {
     constructor() {
         this.client
             .setEndpoint(config.appwriteurl)
-            .setProject(config.appwriteProjectId)
+            .setProject(config.appwriteProjectId);
         this.account = new Account(this.client);
+            
     }
 
-    async createAccount({ email, password, name }) {
+    async createAccount({email, password, name}) {
         try {
-            const useraccount = await this.account.create(ID.unique(), email, password, name );
-            if (useraccount) {
-                //Call another method
-                return this.login({ email, password })
-
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            if (userAccount) {
+                // call another method
+                return this.login({email, password});
             } else {
-                return useraccount;
+               return  userAccount;
             }
         } catch (error) {
             throw error;
-            // console.log("Error in creating the account: ", error);
         }
     }
 
-
-    async login({ email, password }) {
+    async login({email, password}) {
         try {
-            return await this.client.account.createEmailSession(email, password);
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
             throw error;
-            // console.log("Error in logging in with Email: ", error);
         }
     }
 
     async getCurrentUser() {
         try {
             return await this.account.get();
-        } catch (error) {   
-            console.log("No active session found.");
+        } catch (error) {
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
 
         return null;
     }
 
     async logout() {
+
         try {
-            return await this.account.deleteSessions();
-        } catch(error) {
-            console.log("Error in logout: ", error);
+            await this.account.deleteSessions();
+        } catch (error) {
+            console.log("Appwrite serive :: logout :: error", error);
         }
     }
-
 }
 
+const authService = new AuthService();
 
-const authservice = new AuthService();
-export default authservice;
+export default authService
