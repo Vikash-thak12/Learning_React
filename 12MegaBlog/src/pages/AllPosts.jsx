@@ -6,7 +6,7 @@ const Addpost = () => {
 
 
   const [posts, setPosts] = useState([])
-  useEffect(() => { })
+  useEffect(() => {}, [])
 
   appwritreService.getPost([]).then((posts) => {
     if (posts) {
